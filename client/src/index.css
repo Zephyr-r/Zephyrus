@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 定义全局样式 */
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* 全局颜色方案 */
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* 圆角变量 */
+  --radius: 0.5rem;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* 按钮样式 */
+button {
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* 链接样式 */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.25s;
+}
+a:hover {
+  color: #747bff; /* 浅色模式下链接悬停颜色 */
+}
+
+/* 浅色模式 */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547; /* 浅色模式文字颜色 */
+  }
+  button {
+    background-color: #f9f9f9; /* 浅色模式按钮背景 */
+    color: #213547; /* 浅色模式按钮文字颜色 */
+  }
+}
+
+/* 自定义 Tailwind 基础样式 */
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
