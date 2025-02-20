@@ -65,14 +65,14 @@ export function useAuth() {
       await logout();
       authState.setUser(null);
       toast({
-        title: "登出成功",
-        description: "期待您的再次光临！",
+        title: "Logout successful",
+        description: "Hope to see you again!",
       });
       navigate("/");
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "登出失败",
+        title: "Logout failed",
         description: error.message,
       });
     }
@@ -81,8 +81,8 @@ export function useAuth() {
   const requireAuth = (callback) => {
     if (!authState.user) {
       toast({
-        title: "请先登录",
-        description: "此操作需要登录账号",
+        title: "Please log in",
+        description: "You need to be logged in to perform this action",
       });
       navigate("/login");
       return;

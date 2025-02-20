@@ -41,7 +41,7 @@ export const useUserProfile = () => {
       } catch (error) {
         toast({
           variant: "destructive",
-          title: "获取用户信息失败",
+          title: "Failed to fetch user data",
           description: error.message,
         });
       }
@@ -64,8 +64,8 @@ export const useUserProfile = () => {
     if (!canUpdateUsername() && userData.username !== originalUsername) {
       toast({
         variant: "destructive",
-        title: "用户名修改受限",
-        description: "用户名每30天只能修改一次",
+        title: "Username update restricted",
+        description: "Username can only be changed once every 30 days",
       });
       return;
     }
@@ -75,12 +75,12 @@ export const useUserProfile = () => {
       const response = await updateProfile(userData);
       setUserData(response);
       toast({
-        title: "个人资料更新成功",
+        title: "Profile updated successfully",
       });
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "更新失败",
+        title: "Update failed",
         description: error.message,
       });
     } finally {
@@ -93,8 +93,8 @@ export const useUserProfile = () => {
     if (passwordForm.newPassword !== passwordForm.confirmPassword) {
       toast({
         variant: "destructive",
-        title: "密码不匹配",
-        description: "两次输入的新密码不一致",
+        title: "Passwords do not match",
+        description: "The new passwords entered do not match",
       });
       return;
     }
@@ -107,7 +107,7 @@ export const useUserProfile = () => {
       });
 
       toast({
-        title: "密码修改成功",
+        title: "Password updated successfully",
       });
 
       setPasswordForm({
@@ -118,7 +118,7 @@ export const useUserProfile = () => {
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "密码修改失败",
+        title: "Password update failed",
         description: error.message,
       });
     } finally {

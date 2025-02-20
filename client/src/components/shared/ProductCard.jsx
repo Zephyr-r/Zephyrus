@@ -6,11 +6,11 @@ import { Badge } from "@/components/ui/badge";
 
 const getConditionText = (condition) => {
   const conditionMap = {
-    new: "全新",
-    "like-new": "几乎全新",
-    good: "良好",
-    fair: "一般",
-    poor: "较差",
+    new: "Brand New",
+    "like-new": "Like New",
+    good: "Good",
+    fair: "Fair",
+    poor: "Poor",
   };
   return conditionMap[condition] || condition;
 };

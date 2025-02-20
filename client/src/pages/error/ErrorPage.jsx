@@ -17,24 +17,25 @@ const ErrorPage = () => {
   const getErrorMessage = () => {
     if (error.status === 404) {
       return {
-        title: "页面未找到",
-        description: "您访问的页面可能已被移除或暂时无法访问",
-        suggestion: "您可以返回首页，或尝试其他操作",
+        title: "Page Not Found",
+        description:
+          "The page you are looking for may have been moved or is temporarily unavailable.",
+        suggestion: "You can return to the homepage or try another action.",
       };
     }
 
     if (error.status === 403) {
       return {
-        title: "访问受限",
-        description: "您没有权限访问此页面",
-        suggestion: "请先登录，或联系客服获取帮助",
+        title: "Access Denied",
+        description: "You do not have permission to access this page.",
+        suggestion: "Please log in or contact support for assistance.",
       };
     }
 
     return {
-      title: "系统错误",
-      description: error.message || "抱歉，出现了一些问题",
-      suggestion: "请稍后再试，或联系客服获取帮助",
+      title: "System Error",
+      description: error.message || "Sorry, something went wrong.",
+      suggestion: "Please try again later or contact support for assistance.",
     };
   };
 
@@ -54,10 +55,10 @@ const ErrorPage = () => {
         </CardContent>
         <CardFooter className="flex justify-center gap-4">
           <Button variant="outline" onClick={() => navigate(-1)}>
-            返回上页
+            Go Back
           </Button>
           <Button asChild>
-            <Link to="/">返回首页</Link>
+            <Link to="/">Return to Homepage</Link>
           </Button>
         </CardFooter>
       </Card>

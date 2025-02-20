@@ -5,7 +5,7 @@ import { Product } from "../models/Product.js";
 
 const router = express.Router();
 
-// 创建订单
+// Create order
 router.post("/", auth, async (req, res) => {
   try {
     const { productId, paymentMethod } = req.body;
@@ -16,22 +16,26 @@ router.post("/", auth, async (req, res) => {
       "username avatar"
     );
     if (!product) {
-      return res.status(404).json({ error: "商品不存在" });
+      return res.status(404).json({ error: "Product not found" });
     }
 
     // 2. 验证商品状态
     if (product.status !== "available") {
-      return res.status(400).json({ error: "商品已被购买或已下架" });
+      return res
+        .status(400)
+        .json({ error: "Product is already purchased or unavailable" });
     }
 
     // 3. 验证卖家身份
     if (product.seller._id.toString() === req.user._id.toString()) {
-      return res.status(400).json({ error: "不能购买自己的商品" });
+      return res
+        .status(400)
+        .json({ error: "Cannot purchase your own product" });
     }
 
     // 4. 验证支付方式
     if (!paymentMethod) {
-      return res.status(400).json({ error: "请选择支付方式" });
+      return res.status(400).json({ error: "Please select a payment method" });
     }
 
     // 5. 创建订单
@@ -43,11 +47,11 @@ router.post("/", auth, async (req, res) => {
       paymentMethod,
       status: "pending",
       shippingAddress: {
-        address: "当面交易",
-        city: "当面交易",
-        state: "当面交易",
+        address: "Face-to-face transaction",
+        city: "Face-to-face transaction",
+        state: "Face-to-face transaction",
         zipCode: "00000",
-        phone: "当面交易",
+        phone: "Face-to-face transaction",
       },
     });
 
@@ -69,13 +73,13 @@ router.post("/", auth, async (req, res) => {
   } catch (error) {
     // 9. 错误处理
     if (error.name === "ValidationError") {
-      return res.status(400).json({ error: "订单数据验证失败" });
+      return res.status(400).json({ error: "Order data validation failed" });
     }
-    res.status(500).json({ error: "创建订单失败" });
+    res.status(500).json({ error: "Failed to create order" });
   }
 });
 
-// 获取我的订单列表（买家/卖家）
+// Get my orders (buyer/seller)
 router.get("/", auth, async (req, res) => {
   try {
     const {
@@ -108,7 +112,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// 获取订单详情
+// Get order details
 router.get("/:id", auth, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id)
@@ -117,7 +121,7 @@ router.get("/:id", auth, async (req, res) => {
       .populate("seller", "username avatar");
 
     if (!order) {
-      return res.status(404).json({ error: "订单不存在" });
+      return res.status(404).json({ error: "Order not found" });
     }
 
     // 检查是否是订单的买家或卖家
@@ -125,16 +129,18 @@ router.get("/:id", auth, async (req, res) => {
       order.buyer._id.toString() !== req.user._id.toString() &&
       order.seller._id.toString() !== req.user._id.toString()
     ) {
-      return res.status(403).json({ error: "没有权限查看此订单" });
+      return res
+        .status(403)
+        .json({ error: "No permission to view this order" });
     }
 
     res.json(order);
   } catch (error) {
-    res.status(500).json({ error: "获取订单详情失败" });
+    res.status(500).json({ error: "Failed to get order details" });
   }
 });
 
-// 更新订单状态
+// Update order status
 router.put("/:id/status", auth, async (req, res) => {
   const { id } = req.params;
   const { action } = req.body;
@@ -144,7 +150,7 @@ router.put("/:id/status", auth, async (req, res) => {
     // 验证订单存在性
     const order = await Order.findById(id);
     if (!order) {
-      return res.status(404).json({ error: "订单不存在" });
+      return res.status(404).json({ error: "Order not found" });
     }
 
     // 验证用户权限
@@ -152,12 +158,14 @@ router.put("/:id/status", auth, async (req, res) => {
       order.buyer.toString() !== userId &&
       order.seller.toString() !== userId
     ) {
-      return res.status(403).json({ error: "没有操作权限" });
+      return res.status(403).json({ error: "No permission to operate" });
     }
 
     // 检查订单状态
     if (order.status === "completed" || order.status === "cancelled") {
-      return res.status(400).json({ error: "订单已完成或已取消" });
+      return res
+        .status(400)
+        .json({ error: "Order is already completed or cancelled" });
     }
 
     // 根据不同操作更新订单状态
@@ -196,7 +204,7 @@ router.put("/:id/status", auth, async (req, res) => {
         break;
 
       default:
-        return res.status(400).json({ error: "无效的操作类型" });
+        return res.status(400).json({ error: "Invalid operation type" });
     }
 
     await order.save();
@@ -210,7 +218,9 @@ router.put("/:id/status", auth, async (req, res) => {
 
     res.json(order);
   } catch (error) {
-    res.status(500).json({ error: error.message || "更新订单状态失败" });
+    res
+      .status(500)
+      .json({ error: error.message || "Failed to update order status" });
   }
 });
 

@@ -20,8 +20,8 @@ export const AvatarUpload = ({
     if (file.size > 5 * 1024 * 1024) {
       toast({
         variant: "destructive",
-        title: "文件过大",
-        description: "头像图片不能超过 5MB",
+        title: "File too large",
+        description: "Avatar image must not exceed 5MB",
       });
       return;
     }
@@ -30,8 +30,8 @@ export const AvatarUpload = ({
     if (!file.type.startsWith("image/")) {
       toast({
         variant: "destructive",
-        title: "文件类型错误",
-        description: "请上传图片文件",
+        title: "Invalid file type",
+        description: "Please upload an image file",
       });
       return;
     }
@@ -50,12 +50,12 @@ export const AvatarUpload = ({
       onAvatarChange(response.avatar);
 
       toast({
-        title: "头像更新成功",
+        title: "Avatar updated successfully",
       });
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "头像更新失败",
+        title: "Avatar update failed",
         description: error.message,
       });
     }
@@ -75,7 +75,7 @@ export const AvatarUpload = ({
           disabled={disabled}
           onClick={() => document.getElementById("avatar-upload").click()}
         >
-          {disabled ? "上传中..." : "更换头像"}
+          {disabled ? "Uploading..." : "Change Avatar"}
         </Button>
         <input
           id="avatar-upload"

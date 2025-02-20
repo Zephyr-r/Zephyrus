@@ -45,7 +45,7 @@ export const useProductForm = (productId = null) => {
       } catch (error) {
         toast({
           variant: "destructive",
-          title: "获取商品信息失败",
+          title: "Failed to fetch product details",
           description: error.message,
         });
       } finally {
@@ -76,7 +76,7 @@ export const useProductForm = (productId = null) => {
     if (!formData.name.trim()) {
       toast({
         variant: "destructive",
-        title: "请填写商品标题",
+        title: "Please enter a product title",
       });
       return false;
     }
@@ -84,7 +84,7 @@ export const useProductForm = (productId = null) => {
     if (!formData.category) {
       toast({
         variant: "destructive",
-        title: "请选择商品分类",
+        title: "Please select a product category",
       });
       return false;
     }
@@ -92,7 +92,7 @@ export const useProductForm = (productId = null) => {
     if (!formData.price || parseFloat(formData.price) <= 0) {
       toast({
         variant: "destructive",
-        title: "请输入有效的价格",
+        title: "Please enter a valid price",
       });
       return false;
     }
@@ -100,7 +100,7 @@ export const useProductForm = (productId = null) => {
     if (!formData.description.trim()) {
       toast({
         variant: "destructive",
-        title: "请填写商品描述",
+        title: "Please enter a product description",
       });
       return false;
     }
@@ -108,7 +108,7 @@ export const useProductForm = (productId = null) => {
     if (images.length === 0) {
       toast({
         variant: "destructive",
-        title: "请至少上传一张商品图片",
+        title: "Please upload at least one product image",
       });
       return false;
     }
@@ -132,7 +132,8 @@ export const useProductForm = (productId = null) => {
               new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.onload = (e) => resolve(e.target.result);
-                reader.onerror = () => reject(new Error("图片处理失败"));
+                reader.onerror = () =>
+                  reject(new Error("Image processing failed"));
                 reader.readAsDataURL(image.file);
               })
           )
@@ -156,8 +157,8 @@ export const useProductForm = (productId = null) => {
         });
 
         toast({
-          title: "更新成功",
-          description: "商品信息已更新",
+          title: "Update successful",
+          description: "Product details have been updated",
         });
       } else {
         // 创建商品
@@ -167,8 +168,8 @@ export const useProductForm = (productId = null) => {
         });
 
         toast({
-          title: "发布成功",
-          description: "商品已发布到首页",
+          title: "Listing successful",
+          description: "Your product has been listed",
         });
       }
 
@@ -176,7 +177,7 @@ export const useProductForm = (productId = null) => {
     } catch (error) {
       toast({
         variant: "destructive",
-        title: productId ? "更新失败" : "发布失败",
+        title: productId ? "Update failed" : "Listing failed",
         description: error.message,
       });
       return false;

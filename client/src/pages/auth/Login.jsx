@@ -41,15 +41,15 @@ const Login = () => {
       // 更新用户状态
       setUser(response.user);
       toast({
-        title: "登录成功",
-        description: "欢迎回来！",
+        title: "Login Successful",
+        description: "Welcome back!",
       });
       navigate("/"); // 登录成功后跳转到首页
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "登录失败",
-        description: error.message || "用户名或密码错误",
+        title: "Login Failed",
+        description: error.message || "Invalid username or password",
       });
     } finally {
       setIsLoading(false);
@@ -61,27 +61,27 @@ const Login = () => {
       <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">
-            登录账户
+            Sign In
           </CardTitle>
           <CardDescription className="text-center">
-            输入您的账户信息
+            Enter your account credentials
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="username">用户名</Label>
+              <Label htmlFor="username">Username</Label>
               <Input
                 id="username"
                 type="text"
-                placeholder="请输入用户名"
+                placeholder="Enter your username"
                 required
                 value={formData.username}
                 onChange={handleInputChange}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">密码</Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -96,7 +96,7 @@ const Login = () => {
                 to="/forgot-password"
                 className="text-sm text-primary hover:underline"
               >
-                忘记密码？
+                Forgot password?
               </Link>
             </div>
             <Button
@@ -104,14 +104,14 @@ const Login = () => {
               className="w-full"
               disabled={isLoading || !formData.username || !formData.password}
             >
-              {isLoading ? "登录中..." : "登录"}
+              {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
 
           <div className="mt-4 text-center text-sm">
-            还没有账户？{" "}
+            Don&apos;t have an account?{" "}
             <Link to="/register" className="text-primary hover:underline">
-              立即注册
+              Sign up now
             </Link>
           </div>
         </CardContent>

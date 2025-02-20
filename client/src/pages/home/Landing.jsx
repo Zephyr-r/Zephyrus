@@ -64,7 +64,7 @@ const Landing = () => {
 
       {loading && (
         <div className="flex justify-center py-4">
-          <div className="text-lg">加载中...</div>
+          <div className="text-lg">Loading...</div>
         </div>
       )}
 
@@ -74,7 +74,7 @@ const Landing = () => {
             onClick={loadMore}
             className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
           >
-            加载更多
+            Load More
           </button>
         </div>
       )}

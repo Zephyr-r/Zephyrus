@@ -1,6 +1,6 @@
 const BASE_URL = "http://localhost:3000/api/auth";
 
-// Common fetch options for all requests
+// 通用的 fetch 选项
 const getFetchOptions = (method = "GET", body = null) => ({
   method,
   headers: {
@@ -14,7 +14,7 @@ const getFetchOptions = (method = "GET", body = null) => ({
   ...(body ? { body: JSON.stringify(body) } : {}),
 });
 
-// Error handler helper
+// 处理响应的错误
 const handleResponse = async (response) => {
   try {
     const contentType = response.headers.get("content-type");
@@ -22,7 +22,7 @@ const handleResponse = async (response) => {
     const data = isJson ? await response.json() : null;
 
     if (!response.ok) {
-      throw new Error(data?.error || response.statusText || "请求失败");
+      throw new Error(data?.error || response.statusText || "Request failed");
     }
 
     return data;
@@ -32,7 +32,7 @@ const handleResponse = async (response) => {
   }
 };
 
-// 登录
+// Login
 export const login = async (credentials) => {
   try {
     const response = await fetch(
@@ -42,11 +42,11 @@ export const login = async (credentials) => {
     return handleResponse(response);
   } catch (error) {
     console.error("Login error:", error);
-    throw new Error(error.message || "登录失败，请稍后重试");
+    throw new Error(error.message || "Login failed, please try again later");
   }
 };
 
-// 注册
+// Register
 export const register = async (userData) => {
   try {
     const response = await fetch(
@@ -71,7 +71,7 @@ export const getCurrentUser = async () => {
   }
 };
 
-// 登出
+// Logout
 export const logout = async () => {
   try {
     const response = await fetch(`${BASE_URL}/logout`, getFetchOptions("POST"));

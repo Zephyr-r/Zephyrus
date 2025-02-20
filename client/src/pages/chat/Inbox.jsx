@@ -59,7 +59,7 @@ const Inbox = () => {
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "获取聊天列表失败",
+        title: "Failed to fetch chat list",
         description: error.message,
       });
     } finally {
@@ -85,7 +85,7 @@ const Inbox = () => {
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "获取消息失败",
+        title: "Failed to fetch messages",
         description: error.message,
       });
     }
@@ -145,8 +145,9 @@ const Inbox = () => {
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "发送失败",
-        description: error.message || "消息发送失败，请重试",
+        title: "Failed to send message",
+        description:
+          error.message || "Message sending failed, please try again",
       });
     }
   };
@@ -154,7 +155,7 @@ const Inbox = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[calc(100vh-4rem)]">
-        <div className="text-lg">加载中...</div>
+        <div className="text-lg">Loading...</div>
       </div>
     );
   }
@@ -165,7 +166,7 @@ const Inbox = () => {
         {/* 聊天列表 */}
         <div className="col-span-4 border-r">
           <div className="p-4 border-b">
-            <h2 className="text-lg font-semibold">消息列表</h2>
+            <h2 className="text-lg font-semibold">Messages</h2>
           </div>
           <ScrollArea className="h-[calc(100vh-12rem)]">
             {chats.length > 0 ? (
@@ -204,7 +205,9 @@ const Inbox = () => {
                 </div>
               ))
             ) : (
-              <div className="p-4 text-center text-neutral-500">暂无聊天</div>
+              <div className="p-4 text-center text-neutral-500">
+                No messages
+              </div>
             )}
           </ScrollArea>
         </div>
@@ -231,7 +234,7 @@ const Inbox = () => {
                 <div className="space-y-4">
                   {messages.length === 0 ? (
                     <div className="text-center text-neutral-500 bg-white p-4 rounded-lg border border-gray-200">
-                      暂无消息
+                      No messages
                     </div>
                   ) : (
                     messages.map((message) => (
@@ -270,18 +273,18 @@ const Inbox = () => {
                   <Input
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
-                    placeholder="输入消息..."
+                    placeholder="Type a message..."
                     className="flex-1"
                   />
                   <Button type="submit" disabled={!newMessage.trim()}>
-                    发送
+                    Send
                   </Button>
                 </div>
               </form>
             </>
           ) : (
             <div className="flex-1 flex items-center justify-center text-neutral-500">
-              选择一个聊天开始交谈
+              Select a chat to start messaging
             </div>
           )}
         </div>

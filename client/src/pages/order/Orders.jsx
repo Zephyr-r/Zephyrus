@@ -33,7 +33,7 @@ const Orders = () => {
     } catch (err) {
       setError(err.message);
       toast({
-        title: "获取订单失败",
+        title: "Failed to fetch orders",
         description: err.message,
         variant: "destructive",
       });
@@ -50,21 +50,21 @@ const Orders = () => {
   useEffect(() => {
     if (location.state?.orderCancelled) {
       toast({
-        title: "订单状态更新",
+        title: "Order status updated",
         description: location.state.message,
       });
       navigate(".", { replace: true, state: {} });
       fetchOrders();
     } else if (location.state?.orderCreated) {
       toast({
-        title: "订单创建成功",
+        title: "Order created successfully",
         description: location.state.message,
       });
       fetchOrders();
       navigate(".", { replace: true, state: {} });
     } else if (location.state?.orderCompleted) {
       toast({
-        title: "订单状态更新",
+        title: "Order status updated",
         description: location.state.message,
       });
       fetchOrders();
@@ -74,9 +74,9 @@ const Orders = () => {
 
   const getStatusBadge = (status) => {
     const statusMap = {
-      pending: { label: "进行中", className: "bg-yellow-500" },
-      completed: { label: "已完成", className: "bg-green-500" },
-      cancelled: { label: "已取消", className: "bg-red-500" },
+      pending: { label: "Pending", className: "bg-yellow-500" },
+      completed: { label: "Completed", className: "bg-green-500" },
+      cancelled: { label: "Cancelled", className: "bg-red-500" },
     };
 
     const { label, className } = statusMap[status] || statusMap.pending;
@@ -109,7 +109,7 @@ const Orders = () => {
     if (loading) {
       return (
         <div className="text-center py-8">
-          <div className="text-lg">加载中...</div>
+          <div className="text-lg">Loading...</div>
         </div>
       );
     }
@@ -130,7 +130,7 @@ const Orders = () => {
       </div>
     ) : (
       <div className="text-center py-8 text-muted-foreground">
-        {status === "cancelled" ? "暂无已取消的订单" : "暂无订单"}
+        {status === "cancelled" ? "No cancelled orders" : "No orders"}
       </div>
     );
   };
@@ -187,7 +187,7 @@ const Orders = () => {
                     size="sm"
                     onClick={(e) => handleContactUser(e, order.seller)}
                   >
-                    联系卖家
+                    Contact Seller
                   </Button>
                 </div>
               </div>
@@ -228,18 +228,20 @@ const Orders = () => {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-2xl font-bold">我的订单</CardTitle>
-                <CardDescription>查看和管理您的所有订单</CardDescription>
+                <CardTitle className="text-2xl font-bold">My Orders</CardTitle>
+                <CardDescription>
+                  View and manage all your orders
+                </CardDescription>
               </div>
             </div>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="all" className="w-full">
               <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="all">全部</TabsTrigger>
-                <TabsTrigger value="pending">进行中</TabsTrigger>
-                <TabsTrigger value="completed">已完成</TabsTrigger>
-                <TabsTrigger value="cancelled">已取消</TabsTrigger>
+                <TabsTrigger value="all">All</TabsTrigger>
+                <TabsTrigger value="pending">Pending</TabsTrigger>
+                <TabsTrigger value="completed">Completed</TabsTrigger>
+                <TabsTrigger value="cancelled">Cancelled</TabsTrigger>
               </TabsList>
 
               <TabsContent value="all">{renderOrders("all")}</TabsContent>

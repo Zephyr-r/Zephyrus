@@ -34,7 +34,7 @@ export function Header() {
               Zephyrus
             </Link>
 
-            {/* Desktop Categories */}
+            {/* 桌面端分类菜单 */}
             <CategoryMenu />
           </div>
 
@@ -43,10 +43,10 @@ export function Header() {
 
           {/* 右侧：导航按钮 */}
           <div className="flex items-center space-x-2 md:space-x-6">
-            {/* User Menu */}
+            {/* 用户菜单 */}
             <UserMenu />
 
-            {/* Orders Button */}
+            {/* 订单按钮 */}
             {!loading && user && (
               <Button
                 variant="ghost"
@@ -61,7 +61,7 @@ export function Header() {
               </Button>
             )}
 
-            {/* Inbox Button */}
+            {/* 消息按钮 */}
             {!loading && (
               <Button
                 variant="ghost"
@@ -71,8 +71,8 @@ export function Header() {
                 onClick={() => {
                   if (!user) {
                     toast({
-                      title: "请先登录",
-                      description: "查看消息需要登录账号",
+                      title: "Please log in",
+                      description: "You need to log in to view messages",
                     });
                     navigate("/login");
                     return;
@@ -89,7 +89,7 @@ export function Header() {
               </Button>
             )}
 
-            {/* Sell Button */}
+            {/* 发布商品按钮 */}
             {!loading && (
               <Button
                 variant="ghost"

@@ -39,7 +39,7 @@ const Search = () => {
     return (
       <div className="container mx-auto px-4 py-8 mt-16">
         <div className="flex justify-center items-center min-h-[400px]">
-          <div className="text-lg">搜索中...</div>
+          <div className="text-lg">Searching...</div>
         </div>
       </div>
     );
@@ -59,7 +59,9 @@ const Search = () => {
     return (
       <div className="container mx-auto px-4 py-8 mt-16">
         <div className="flex justify-center items-center min-h-[400px]">
-          <div className="text-lg text-neutral-500">请输入搜索关键词</div>
+          <div className="text-lg text-neutral-500">
+            Please enter a search keyword
+          </div>
         </div>
       </div>
     );
@@ -70,10 +72,10 @@ const Search = () => {
       {/* 搜索结果头部 */}
       <div className="mb-8">
         <h1 className="text-xl md:text-2xl font-bold mb-2">
-          搜索结果: {searchQuery}
+          Search results: {searchQuery}
         </h1>
         <p className="text-sm md:text-base text-neutral-500">
-          找到 {products.length} 个相关商品
+          Found {products.length} related products
         </p>
       </div>
 
@@ -94,9 +96,11 @@ const Search = () => {
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-lg text-neutral-500 mb-2">没有找到相关商品</p>
+          <p className="text-lg text-neutral-500 mb-2">
+            No related products found
+          </p>
           <p className="text-sm text-neutral-400">
-            试试其他关键词，或者浏览其他商品
+            Try other keywords or browse other products
           </p>
         </div>
       )}

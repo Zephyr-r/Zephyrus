@@ -20,15 +20,17 @@ const Setting = () => {
     <div className="container max-w-2xl mx-auto p-4">
       <Card>
         <CardHeader>
-          <CardTitle>设置</CardTitle>
+          <CardTitle>Settings</CardTitle>
         </CardHeader>
         <CardContent>
+          {/* 选项卡切换编辑资料和修改密码 */}
           <Tabs defaultValue="profile" className="space-y-4">
             <TabsList>
-              <TabsTrigger value="profile">编辑资料</TabsTrigger>
-              <TabsTrigger value="password">修改密码</TabsTrigger>
+              <TabsTrigger value="profile">Edit Profile</TabsTrigger>
+              <TabsTrigger value="password">Change Password</TabsTrigger>
             </TabsList>
 
+            {/* 个人资料编辑表单 */}
             <TabsContent value="profile">
               <ProfileForm
                 userData={userData}
@@ -39,6 +41,7 @@ const Setting = () => {
               />
             </TabsContent>
 
+            {/* 修改密码表单 */}
             <TabsContent value="password">
               <PasswordForm
                 passwordForm={passwordForm}

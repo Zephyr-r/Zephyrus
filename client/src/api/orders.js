@@ -1,6 +1,6 @@
 const BASE_URL = "http://localhost:3000/api/orders";
 
-// Common fetch options
+// 获取通用的fetch配置选项
 const getFetchOptions = (method = "GET", body = null) => ({
   method,
   headers: {
@@ -12,7 +12,7 @@ const getFetchOptions = (method = "GET", body = null) => ({
   ...(body ? { body: JSON.stringify(body) } : {}),
 });
 
-// Error handler helper
+// 处理响应的辅助函数
 const handleResponse = async (response) => {
   const contentType = response.headers.get("content-type");
   const isJson = contentType && contentType.includes("application/json");
@@ -20,25 +20,25 @@ const handleResponse = async (response) => {
   if (!response.ok) {
     if (isJson) {
       const error = await response.json();
-      throw new Error(error.error || "请求失败");
+      throw new Error(error.error || "Request failed");
     }
-    throw new Error("服务器错误，请稍后再试");
+    throw new Error("Server error, please try again later");
   }
 
   if (isJson) {
     return response.json();
   }
 
-  throw new Error("服务器返回了非JSON格式的数据");
+  throw new Error("Server returned non-JSON data");
 };
 
-// 创建订单
+// Create an order
 export const createOrder = async (orderData) => {
   const response = await fetch(BASE_URL, getFetchOptions("POST", orderData));
   return handleResponse(response);
 };
 
-// 获取订单列表
+// Get order list
 export const getOrders = async () => {
   const response = await fetch(
     `http://localhost:3000/api/users/orders`,
@@ -47,13 +47,13 @@ export const getOrders = async () => {
   return handleResponse(response);
 };
 
-// 获取订单详情
+// Get order details
 export const getOrderById = async (id) => {
   const response = await fetch(`${BASE_URL}/${id}`, getFetchOptions());
   return handleResponse(response);
 };
 
-// 更新订单状态
+// Update order status
 export const updateOrderStatus = async (id, { action }) => {
   const response = await fetch(
     `${BASE_URL}/${id}/status`,

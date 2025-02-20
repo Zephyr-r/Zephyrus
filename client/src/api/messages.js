@@ -1,6 +1,6 @@
 const BASE_URL = "http://localhost:3000/api/messages";
 
-// Common fetch options
+// 通用的 fetch 选项
 const getFetchOptions = (method = "GET", body = null) => ({
   method,
   headers: {
@@ -14,7 +14,7 @@ const getFetchOptions = (method = "GET", body = null) => ({
   ...(body ? { body: JSON.stringify(body) } : {}),
 });
 
-// Error handler helper
+// 处理响应的错误
 const handleResponse = async (response) => {
   const contentType = response.headers.get("content-type");
   const isJson = contentType && contentType.includes("application/json");
@@ -22,16 +22,16 @@ const handleResponse = async (response) => {
   if (!response.ok) {
     if (isJson) {
       const error = await response.json();
-      throw new Error(error.error || "请求失败");
+      throw new Error(error.error || "Request failed");
     }
-    throw new Error("服务器错误，请稍后再试");
+    throw new Error("Server error, please try again later");
   }
 
   if (isJson) {
     return response.json();
   }
 
-  throw new Error("服务器返回了非JSON格式的数据");
+  throw new Error("Server returned non-JSON data");
 };
 
 // 获取聊天列表

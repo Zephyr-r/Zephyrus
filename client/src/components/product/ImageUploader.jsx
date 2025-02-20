@@ -21,8 +21,8 @@ export const ImageUploader = ({
     if (oversizedFiles.length > 0) {
       toast({
         variant: "destructive",
-        title: "文件过大",
-        description: `图片大小不能超过${maxSize / 1024 / 1024}MB`,
+        title: "File too large",
+        description: `Image size must not exceed ${maxSize / 1024 / 1024}MB`,
       });
       return;
     }
@@ -37,8 +37,8 @@ export const ImageUploader = ({
     if (totalImages.length > maxImages) {
       toast({
         variant: "destructive",
-        title: "超出限制",
-        description: `最多只能上传${maxImages}张图片`,
+        title: "Limit exceeded",
+        description: `You can upload up to ${maxImages} images`,
       });
       return;
     }
@@ -48,7 +48,7 @@ export const ImageUploader = ({
 
   return (
     <div className="space-y-4">
-      <Label>商品图片</Label>
+      <Label>Product Images</Label>
       <div className="grid grid-cols-5 gap-4">
         {images.map((image, index) => (
           <div
@@ -57,7 +57,7 @@ export const ImageUploader = ({
           >
             <img
               src={image.url}
-              alt={`商品图片 ${index + 1}`}
+              alt={`Product Image ${index + 1}`}
               className="h-full w-full object-cover rounded-lg"
             />
             <Button
@@ -85,7 +85,7 @@ export const ImageUploader = ({
         )}
       </div>
       <p className="text-sm text-neutral-500">
-        最多上传{maxImages}张图片，建议尺寸800x800px
+        Upload up to {maxImages} images, recommended size 800x800px
       </p>
     </div>
   );

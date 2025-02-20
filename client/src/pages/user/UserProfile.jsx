@@ -48,7 +48,7 @@ const UserProfile = () => {
         setError(err.message);
         toast({
           variant: "destructive",
-          title: "获取用户信息失败",
+          title: "Failed to fetch user data",
           description: err.message,
         });
       } finally {
@@ -73,13 +73,13 @@ const UserProfile = () => {
         listings: prev.listings.filter((p) => p._id !== productToDelete),
       }));
       toast({
-        title: "删除成功",
-        description: "商品已成功删除",
+        title: "Deleted successfully",
+        description: "The product has been successfully deleted.",
       });
     } catch (err) {
       toast({
         variant: "destructive",
-        title: "删除失败",
+        title: "Failed to delete",
         description: err.message,
       });
     } finally {
@@ -97,7 +97,7 @@ const UserProfile = () => {
     return (
       <div className="container mx-auto px-4 py-8 mt-16">
         <div className="flex justify-center items-center min-h-[400px]">
-          <div className="text-lg">加载中...</div>
+          <div className="text-lg">Loading...</div>
         </div>
       </div>
     );
@@ -107,7 +107,9 @@ const UserProfile = () => {
     return (
       <div className="container mx-auto px-4 py-8 mt-16">
         <div className="flex justify-center items-center min-h-[400px]">
-          <div className="text-lg text-red-500">{error || "用户不存在"}</div>
+          <div className="text-lg text-red-500">
+            {error || "User not found"}
+          </div>
         </div>
       </div>
     );
@@ -125,10 +127,10 @@ const UserProfile = () => {
           <div className="flex-1">
             <h1 className="text-2xl font-bold mb-2">{userData.username}</h1>
             <p className="text-muted-foreground mb-4">
-              加入时间：{new Date(userData.createdAt).toLocaleDateString()}
+              Joined on {new Date(userData.createdAt).toLocaleDateString()}
             </p>
             <p className="text-neutral-600">
-              {userData.bio || "这个用户很懒，还没有填写简介"}
+              {userData.bio || "This user hasn't added a bio yet."}
             </p>
           </div>
         </div>
@@ -137,9 +139,11 @@ const UserProfile = () => {
       {/* 在售商品 */}
       <div className="space-y-6">
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-bold">在售商品</h2>
+          <h2 className="text-xl font-bold">Active Listings</h2>
           {isOwnProfile && (
-            <Button onClick={() => navigate("/sell")}>发布新商品</Button>
+            <Button onClick={() => navigate("/sell")}>
+              List a new product
+            </Button>
           )}
         </div>
         {userData.listings.length > 0 ? (
@@ -163,14 +167,14 @@ const UserProfile = () => {
                       size="sm"
                       onClick={() => handleEdit(product._id)}
                     >
-                      编辑
+                      Edit
                     </Button>
                     <Button
                       variant="destructive"
                       size="sm"
                       onClick={() => openDeleteDialog(product._id)}
                     >
-                      删除
+                      Delete
                     </Button>
                   </div>
                 )}
@@ -179,7 +183,7 @@ const UserProfile = () => {
           </div>
         ) : (
           <div className="text-center py-12 text-muted-foreground">
-            暂无在售商品
+            No active listings
           </div>
         )}
       </div>
@@ -188,14 +192,15 @@ const UserProfile = () => {
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>确认删除</AlertDialogTitle>
+            <AlertDialogTitle>Confirm Delete</AlertDialogTitle>
             <AlertDialogDescription>
-              确定要删除这个商品吗？此操作无法撤销。
+              Are you sure you want to delete this product? This action cannot
+              be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>取消</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete}>删除</AlertDialogAction>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDelete}>Delete</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

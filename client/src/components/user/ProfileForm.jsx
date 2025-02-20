@@ -27,7 +27,7 @@ export const ProfileForm = ({
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="firstName">名字</Label>
+          <Label htmlFor="firstName">First Name</Label>
           <Input
             id="firstName"
             value={userData.firstName}
@@ -36,7 +36,7 @@ export const ProfileForm = ({
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="lastName">姓氏</Label>
+          <Label htmlFor="lastName">Last Name</Label>
           <Input
             id="lastName"
             value={userData.lastName}
@@ -47,7 +47,7 @@ export const ProfileForm = ({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="username">用户名</Label>
+        <Label htmlFor="username">Username</Label>
         <Input
           id="username"
           value={userData.username}
@@ -56,24 +56,24 @@ export const ProfileForm = ({
         />
         {!canUpdateUsername && (
           <p className="text-sm text-muted-foreground">
-            用户名每30天只能修改一次
+            Username can only be changed once every 30 days
           </p>
         )}
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="bio">个人简介</Label>
+        <Label htmlFor="bio">Bio</Label>
         <Textarea
           id="bio"
           value={userData.bio}
           onChange={handleChange("bio")}
           disabled={loading}
-          placeholder="介绍一下你自己..."
+          placeholder="Tell us about yourself..."
         />
       </div>
 
       <Button type="submit" disabled={loading}>
-        {loading ? "保存中..." : "保存更改"}
+        {loading ? "Saving..." : "Save Changes"}
       </Button>
     </form>
   );

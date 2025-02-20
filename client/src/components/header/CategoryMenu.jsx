@@ -23,7 +23,7 @@ export function CategoryMenu() {
             }}
           >
             <AiOutlineHome className="h-5 w-5 inline-block mr-2" />
-            <span className="text-base">租房 (即将上线)</span>
+            <span className="text-base">Rent a Home (Coming Soon)</span>
           </Link>
 
           <Link
@@ -34,7 +34,7 @@ export function CategoryMenu() {
             }}
           >
             <AiOutlineCar className="h-5 w-5 inline-block mr-2" />
-            <span className="text-base">租车 (即将上线)</span>
+            <span className="text-base">Rent a Car (Coming Soon)</span>
           </Link>
         </div>
       </div>

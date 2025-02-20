@@ -32,7 +32,7 @@ export function MobileMenu() {
             <Button asChild variant="outline" className="w-full justify-start">
               <Link to="/login">
                 <AiOutlineUser className="mr-2 h-5 w-5" />
-                登录/注册
+                Log in / Sign up
               </Link>
             </Button>
           </div>
@@ -40,7 +40,7 @@ export function MobileMenu() {
           {/* 导航菜单 */}
           <nav className="flex-1 overflow-y-auto">
             <div className="p-4">
-              <h2 className="font-semibold mb-2">分类</h2>
+              <h2 className="font-semibold mb-2">Categories</h2>
               <div className="space-y-1">
                 <Button
                   variant="ghost"
@@ -48,7 +48,7 @@ export function MobileMenu() {
                   disabled
                 >
                   <AiOutlineHome className="mr-2 h-5 w-5" />
-                  租房 (即将上线)
+                  Rent a Home (Coming Soon)
                 </Button>
 
                 <Button
@@ -57,7 +57,7 @@ export function MobileMenu() {
                   disabled
                 >
                   <AiOutlineCar className="mr-2 h-5 w-5" />
-                  租车 (即将上线)
+                  Rent a Car (Coming Soon)
                 </Button>
               </div>
             </div>
@@ -73,7 +73,7 @@ export function MobileMenu() {
                 >
                   <Link to="/sell">
                     <AiOutlineDollar className="mr-2 h-5 w-5" />
-                    发布商品
+                    Sell Item
                   </Link>
                 </Button>
 
@@ -84,7 +84,7 @@ export function MobileMenu() {
                 >
                   <Link to="/setting">
                     <AiOutlineSetting className="mr-2 h-5 w-5" />
-                    设置
+                    Settings
                   </Link>
                 </Button>
 
@@ -96,7 +96,7 @@ export function MobileMenu() {
                   >
                     <Link to="/orders">
                       <AiOutlineOrderedList className="mr-2 h-5 w-5" />
-                      我的订单
+                      My Orders
                     </Link>
                   </Button>
                 )}

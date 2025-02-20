@@ -30,22 +30,22 @@ const Register = () => {
   const validateForm = () => {
     const errors = {};
     if (formData.password.length < 6) {
-      errors.password = "密码长度至少为6位";
+      errors.password = "Password must be at least 6 characters";
     }
     if (formData.password !== formData.confirmPassword) {
-      errors.confirmPassword = "两次输入的密码不一致";
+      errors.confirmPassword = "Passwords do not match";
     }
     if (formData.username.length < 2) {
-      errors.username = "用户名长度至少为2位";
+      errors.username = "Username must be at least 2 characters";
     }
     if (!formData.email.includes("@")) {
-      errors.email = "请输入有效的邮箱地址";
+      errors.email = "Please enter a valid email address";
     }
     if (!formData.firstName.trim()) {
-      errors.firstName = "请输入名字";
+      errors.firstName = "Please enter your first name";
     }
     if (!formData.lastName.trim()) {
-      errors.lastName = "请输入姓氏";
+      errors.lastName = "Please enter your last name";
     }
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
@@ -66,22 +66,28 @@ const Register = () => {
       });
 
       toast({
-        title: "注册成功",
-        description: "请登录您的账户",
+        title: "Registration Successful",
+        description: "Please log in to your account",
       });
       navigate("/login");
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "注册失败",
+        title: "Registration Failed",
         description: error.message,
       });
-      // 处理特定的错误
+      // Handle specific error messages
       if (error.message.includes("email")) {
-        setFormErrors((prev) => ({ ...prev, email: "该邮箱已被注册" }));
+        setFormErrors((prev) => ({
+          ...prev,
+          email: "This email is already registered",
+        }));
       }
       if (error.message.includes("username")) {
-        setFormErrors((prev) => ({ ...prev, username: "该用户名已被使用" }));
+        setFormErrors((prev) => ({
+          ...prev,
+          username: "This username is already taken",
+        }));
       }
     } finally {
       setIsLoading(false);
@@ -94,7 +100,7 @@ const Register = () => {
       ...prev,
       [name]: value,
     }));
-    // 清除对应字段的错误
+    // Clear corresponding error
     if (formErrors[name]) {
       setFormErrors((prev) => {
         const newErrors = { ...prev };
@@ -119,24 +125,24 @@ const Register = () => {
       <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">
-            创建账户
+            Create Account
           </CardTitle>
           <CardDescription className="text-center">
-            填写以下信息创建您的账户
+            Fill in the details below to create your account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="lastName">姓氏</Label>
+                <Label htmlFor="lastName">Last Name</Label>
                 <Input
                   id="lastName"
                   name="lastName"
                   type="text"
                   value={formData.lastName}
                   onChange={handleChange}
-                  placeholder="请输入姓氏"
+                  placeholder="Enter your last name"
                   required
                   className={formErrors.lastName ? "border-red-500" : ""}
                 />
@@ -145,14 +151,14 @@ const Register = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="firstName">名字</Label>
+                <Label htmlFor="firstName">First Name</Label>
                 <Input
                   id="firstName"
                   name="firstName"
                   type="text"
                   value={formData.firstName}
                   onChange={handleChange}
-                  placeholder="请输入名字"
+                  placeholder="Enter your first name"
                   required
                   className={formErrors.firstName ? "border-red-500" : ""}
                 />
@@ -163,14 +169,14 @@ const Register = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="username">用户名</Label>
+              <Label htmlFor="username">Username</Label>
               <Input
                 id="username"
                 name="username"
                 type="text"
                 value={formData.username}
                 onChange={handleChange}
-                placeholder="请输入用户名"
+                placeholder="Enter your username"
                 required
                 className={formErrors.username ? "border-red-500" : ""}
               />
@@ -179,7 +185,7 @@ const Register = () => {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">邮箱</Label>
+              <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
                 name="email"
@@ -195,7 +201,7 @@ const Register = () => {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">密码</Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 name="password"
@@ -211,7 +217,7 @@ const Register = () => {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword">确认密码</Label>
+              <Label htmlFor="confirmPassword">Confirm Password</Label>
               <Input
                 id="confirmPassword"
                 name="confirmPassword"
@@ -233,14 +239,14 @@ const Register = () => {
               className="w-full"
               disabled={isLoading || !isFormValid()}
             >
-              {isLoading ? "注册中..." : "注册"}
+              {isLoading ? "Registering..." : "Register"}
             </Button>
           </form>
 
           <div className="mt-4 text-center text-sm">
-            已有账户？{" "}
+            Already have an account?{" "}
             <Link to="/login" className="text-primary hover:underline">
-              立即登录
+              Log in now
             </Link>
           </div>
         </CardContent>

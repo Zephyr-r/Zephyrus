@@ -14,10 +14,10 @@ export const ProductForm = ({ formData, onChange, disabled }) => {
   return (
     <div className="space-y-6">
       <div className="grid gap-2">
-        <Label htmlFor="name">商品标题</Label>
+        <Label htmlFor="name">Product Title</Label>
         <Input
           id="name"
-          placeholder="请输入商品标题"
+          placeholder="Enter product title"
           required
           maxLength={100}
           value={formData.name}
@@ -27,7 +27,7 @@ export const ProductForm = ({ formData, onChange, disabled }) => {
       </div>
 
       <div className="grid gap-2">
-        <Label htmlFor="category">商品分类</Label>
+        <Label htmlFor="category">Category</Label>
         <Select
           value={formData.category}
           onValueChange={(value) =>
@@ -36,21 +36,21 @@ export const ProductForm = ({ formData, onChange, disabled }) => {
           disabled={disabled}
         >
           <SelectTrigger>
-            <SelectValue placeholder="选择分类" />
+            <SelectValue placeholder="Select category" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="electronics">电子产品</SelectItem>
-            <SelectItem value="clothing">服装</SelectItem>
-            <SelectItem value="books">图书</SelectItem>
-            <SelectItem value="furniture">家具</SelectItem>
-            <SelectItem value="sports">运动</SelectItem>
-            <SelectItem value="others">其他</SelectItem>
+            <SelectItem value="electronics">Electronics</SelectItem>
+            <SelectItem value="clothing">Clothing</SelectItem>
+            <SelectItem value="books">Books</SelectItem>
+            <SelectItem value="furniture">Furniture</SelectItem>
+            <SelectItem value="sports">Sports</SelectItem>
+            <SelectItem value="others">Others</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
       <div className="grid gap-2">
-        <Label htmlFor="condition">商品状态</Label>
+        <Label htmlFor="condition">Condition</Label>
         <Select
           value={formData.condition}
           onValueChange={(value) =>
@@ -59,20 +59,20 @@ export const ProductForm = ({ formData, onChange, disabled }) => {
           disabled={disabled}
         >
           <SelectTrigger>
-            <SelectValue placeholder="选择商品状态" />
+            <SelectValue placeholder="Select condition" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="new">全新</SelectItem>
-            <SelectItem value="like-new">几乎全新</SelectItem>
-            <SelectItem value="good">良好</SelectItem>
-            <SelectItem value="fair">一般</SelectItem>
-            <SelectItem value="poor">较差</SelectItem>
+            <SelectItem value="new">Brand New</SelectItem>
+            <SelectItem value="like-new">Like New</SelectItem>
+            <SelectItem value="good">Good</SelectItem>
+            <SelectItem value="fair">Fair</SelectItem>
+            <SelectItem value="poor">Poor</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
       <div className="grid gap-2">
-        <Label htmlFor="price">价格</Label>
+        <Label htmlFor="price">Price</Label>
         <div className="relative">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500">
             RM
@@ -93,10 +93,10 @@ export const ProductForm = ({ formData, onChange, disabled }) => {
       </div>
 
       <div className="grid gap-2">
-        <Label htmlFor="description">商品描述</Label>
+        <Label htmlFor="description">Description</Label>
         <Textarea
           id="description"
-          placeholder="详细描述商品的特点、使用情况等"
+          placeholder="Provide details about the product, its condition, usage, etc."
           required
           maxLength={1000}
           className="min-h-[150px] resize-none"
@@ -105,7 +105,7 @@ export const ProductForm = ({ formData, onChange, disabled }) => {
           disabled={disabled}
         />
         <p className="text-sm text-muted-foreground">
-          {formData.description.length}/1000 字符
+          {formData.description.length}/1000 characters
         </p>
       </div>
     </div>

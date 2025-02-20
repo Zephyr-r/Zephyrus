@@ -33,18 +33,18 @@ const ForgotPassword = () => {
       });
 
       if (!response.ok) {
-        throw new Error("请求失败");
+        throw new Error("Request failed");
       }
 
       setIsEmailSent(true);
       toast({
-        title: "邮件已发送",
-        description: "请查看您的邮箱",
+        title: "Email Sent",
+        description: "Please check your inbox",
       });
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "发送失败",
+        title: "Failed to send",
         description: error.message,
       });
     } finally {
@@ -56,11 +56,11 @@ const ForgotPassword = () => {
     <div className="container max-w-md mx-auto p-4">
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">忘记密码</CardTitle>
+          <CardTitle className="text-2xl font-bold">Forgot Password</CardTitle>
           <CardDescription>
             {!isEmailSent
-              ? "请输入您的邮箱地址，我们将发送重置密码链接给您"
-              : "重置密码链接已发送，请查看您的邮箱"}
+              ? "Enter your email address, and we will send you a password reset link."
+              : "A password reset link has been sent. Please check your email."}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -68,7 +68,7 @@ const ForgotPassword = () => {
             <form onSubmit={handleSubmit}>
               <div className="grid gap-6">
                 <div className="grid gap-2">
-                  <Label htmlFor="email">邮箱地址</Label>
+                  <Label htmlFor="email">Email Address</Label>
                   <Input
                     id="email"
                     type="email"
@@ -85,17 +85,19 @@ const ForgotPassword = () => {
                   className="w-full"
                   disabled={isSubmitting || !email.includes("@")}
                 >
-                  {isSubmitting ? "发送中..." : "发送重置链接"}
+                  {isSubmitting ? "Sending..." : "Send Reset Link"}
                 </Button>
               </div>
             </form>
           ) : (
             <div className="text-center space-y-4">
               <p className="text-sm text-gray-600">
-                如果该邮箱已注册，您将收到一封包含重置密码链接的邮件。
-                请检查您的收件箱和垃圾邮件文件夹。
+                If this email is registered, you will receive an email with a
+                password reset link. Please check your inbox and spam folder.
               </p>
-              <p className="text-sm text-gray-600">链接有效期为30分钟。</p>
+              <p className="text-sm text-gray-600">
+                The link is valid for 30 minutes.
+              </p>
             </div>
           )}
         </CardContent>
@@ -104,7 +106,7 @@ const ForgotPassword = () => {
             to="/login"
             className="text-sm text-gray-600 hover:text-gray-900 hover:underline"
           >
-            返回登录
+            Back to Login
           </Link>
         </CardFooter>
       </Card>

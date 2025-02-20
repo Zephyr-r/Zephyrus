@@ -18,7 +18,7 @@ export function useProduct() {
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "搜索失败",
+        title: "Search failed",
         description: error.message,
       });
       return [];
@@ -43,7 +43,7 @@ export function useProduct() {
       setError(err.message);
       toast({
         variant: "destructive",
-        title: "获取商品失败",
+        title: "Failed to fetch products",
         description: err.message,
       });
       return {

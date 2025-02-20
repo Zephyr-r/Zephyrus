@@ -16,7 +16,7 @@ export const PasswordForm = ({
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="currentPassword">当前密码</Label>
+        <Label htmlFor="currentPassword">Current Password</Label>
         <Input
           id="currentPassword"
           type="password"
@@ -27,7 +27,7 @@ export const PasswordForm = ({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="newPassword">新密码</Label>
+        <Label htmlFor="newPassword">New Password</Label>
         <Input
           id="newPassword"
           type="password"
@@ -38,7 +38,7 @@ export const PasswordForm = ({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="confirmPassword">确认新密码</Label>
+        <Label htmlFor="confirmPassword">Confirm New Password</Label>
         <Input
           id="confirmPassword"
           type="password"
@@ -49,7 +49,7 @@ export const PasswordForm = ({
       </div>
 
       <Button type="submit" disabled={loading}>
-        {loading ? "修改中..." : "修改密码"}
+        {loading ? "Updating..." : "Change Password"}
       </Button>
     </form>
   );

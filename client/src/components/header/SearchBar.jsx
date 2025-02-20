@@ -30,7 +30,7 @@ export function SearchBar({ isMobile = false }) {
         <form onSubmit={handleSubmit} className="flex relative">
           <Input
             type="search"
-            placeholder="搜索商品..."
+            placeholder="Search for products..."
             className="pr-12 rounded-full h-10 text-base"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}

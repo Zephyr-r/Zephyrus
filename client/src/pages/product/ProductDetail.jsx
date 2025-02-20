@@ -16,7 +16,7 @@ const ProductDetail = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [product, setProduct] = useState({
-    name: "加载中...",
+    name: "Loading...",
     price: 0,
     description: "",
     images: [],
@@ -37,7 +37,7 @@ const ProductDetail = () => {
       } catch (err) {
         setError(err.message);
         setProduct({
-          name: "商品未找到",
+          name: "Product not found",
           price: 0,
           description: "",
           images: [],
@@ -82,8 +82,8 @@ const ProductDetail = () => {
     // 检查用户是否已登录
     if (!user) {
       toast({
-        title: "请先登录",
-        description: "联系卖家需要登录账号",
+        title: "Please log in first",
+        description: "You need to log in to contact the seller",
       });
       navigate("/login");
       return;
@@ -93,8 +93,8 @@ const ProductDetail = () => {
     if (user.id === product.seller._id.toString()) {
       toast({
         variant: "destructive",
-        title: "无法与自己聊天",
-        description: "这是你自己的商品",
+        title: "Cannot chat with yourself",
+        description: "This is your own product",
       });
       return;
     }
@@ -119,8 +119,8 @@ const ProductDetail = () => {
   const handleBuy = () => {
     if (!user) {
       toast({
-        title: "请先登录",
-        description: "购买商品需要登录账号",
+        title: "Please log in first",
+        description: "You need to log in to purchase",
       });
       navigate("/login");
       return;
@@ -129,8 +129,8 @@ const ProductDetail = () => {
     if (user.id === product.seller._id) {
       toast({
         variant: "destructive",
-        title: "无法购买自己的商品",
-        description: "这是你自己发布的商品",
+        title: "Cannot purchase your own product",
+        description: "This is your own product",
       });
       return;
     }
@@ -154,7 +154,7 @@ const ProductDetail = () => {
     <div className="container mx-auto px-4 py-8 mt-[4rem]">
       {loading ? (
         <div className="flex justify-center items-center min-h-[400px]">
-          <div className="text-lg">加载中...</div>
+          <div className="text-lg">Loading...</div>
         </div>
       ) : error ? (
         <div className="flex justify-center items-center min-h-[400px]">
@@ -247,7 +247,9 @@ const ProductDetail = () => {
               </Avatar>
               <div>
                 <h3 className="font-medium">{product.seller?.username}</h3>
-                <p className="text-sm text-muted-foreground">查看卖家主页</p>
+                <p className="text-sm text-muted-foreground">
+                  View seller profile
+                </p>
               </div>
             </div>
 
@@ -261,19 +263,19 @@ const ProductDetail = () => {
 
             {/* 商品状态 */}
             <div>
-              <h3 className="font-medium mb-2">商品状态</h3>
+              <h3 className="font-medium mb-2">Condition</h3>
               <div className="text-muted-foreground">
-                {product.condition === "new" && "全新"}
-                {product.condition === "like-new" && "几乎全新"}
-                {product.condition === "good" && "良好"}
-                {product.condition === "fair" && "一般"}
-                {product.condition === "poor" && "较差"}
+                {product.condition === "new" && "New"}
+                {product.condition === "like-new" && "Like New"}
+                {product.condition === "good" && "Good"}
+                {product.condition === "fair" && "Fair"}
+                {product.condition === "poor" && "Poor"}
               </div>
             </div>
 
             {/* 商品描述 */}
             <div>
-              <h3 className="font-medium mb-2">商品描述</h3>
+              <h3 className="font-medium mb-2">Description</h3>
               <p className="text-muted-foreground whitespace-pre-line">
                 {product.description}
               </p>
@@ -286,10 +288,10 @@ const ProductDetail = () => {
                 variant="outline"
                 onClick={handleContactSeller}
               >
-                聊一聊
+                Chat
               </Button>
               <Button className="flex-1" onClick={handleBuy}>
-                立即购买
+                Buy Now
               </Button>
             </div>
           </div>
